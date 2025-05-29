@@ -7,4 +7,5 @@ Về phần code thì cần đăng kí tài khoản microsoft azure và setup m�
 
 Setup vscode: https://github.com/microsoft/IoT-For-Beginners/blob/main/1-getting-started/lessons/1-introduction-to-iot/virtual-device.md
 
-Phần mình làm không cần counterfit
+Phần mình làm không cần counterfit, mình đang làm assignment là build a universal translator: https://github.com/microsoft/IoT-For-Beginners/blob/main/6-consumer/lessons/4-multiple-language-support/assignment.md
+
