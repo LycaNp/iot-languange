@@ -6,3 +6,5 @@ Slide tham khảo làm theo: [lesson-25-preliminary.pptx](https://github.com/use
 Về phần code thì cần đăng kí tài khoản microsoft azure và setup môi trường cho vs code
 
 Setup vscode: https://github.com/microsoft/IoT-For-Beginners/blob/main/1-getting-started/lessons/1-introduction-to-iot/virtual-device.md
+
+Phần mình làm không cần counterfit
