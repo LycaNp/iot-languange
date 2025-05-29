@@ -7,20 +7,21 @@ from azure.cognitiveservices.speech import SpeechConfig, SpeechSynthesizer, Audi
 from azure.iot.device import IoTHubDeviceClient, Message, MethodResponse
 from azure.cognitiveservices.speech.audio import AudioOutputConfig
 
+# Phần này cần api key riêng của azure
 # === Configuration ===
-speech_api_key = "9Sn9EHNeX1vtzScdJPbRguMVnh6pQnmKKNrFABDeF4qWfuQNaiX9JQQJ99BDACqBBLyXJ3w3AAAYACOGz5lK"
-speech_location = "southeastasia"
+speech_api_key = "<speechapikey>"
+speech_location = "<location, e.g:southeastasia>"
 
-translator_api_key = "9kEZtG9GBTdkPVYcfO4T9sZyGL1SHrxzxfzMOsBmsQQDgCuaaiUzJQQJ99BEACqBBLyXJ3w3AAAbACOGzndo"
+translator_api_key = "<>"
 translator_endpoint = "https://api.cognitive.microsofttranslator.com"
-translator_region = "southeastasia"
+translator_region = "<location>"
 
 from_language = 'fr-FR'
 to_language = 'en-US'
 
-connection_string = "HostName=IOThubdevice.azure-devices.net;DeviceId=LASasuss;SharedAccessKey=D5SUhZKL8uUdZ7YVIwb5w+KH7LC+/fPllTYJnYzPjwY="
+connection_string = "<>"
 
-get_timer_url = "http://localhost:7071/api/text2timer"
+get_timer_url = "<>"
 
 # === Global flag to prevent echo ===
 listening = True
@@ -31,16 +32,6 @@ print("Connecting to IoT Hub...")
 device_client = IoTHubDeviceClient.create_from_connection_string(connection_string)
 device_client.connect()
 print("IoT Hub connected.")
-
-# === Receive message from IOT Hub ===
-def message_handler(message):
-    print("📩 Message received from IoT Hub:", message.data)
-    payload = json.loads(message.data)
-    text = payload.get("speech", "")
-    if text:
-        say(text)  # speak the translated message
-
-device_client.on_message_received = message_handler
 
 # === Speech Config ===
 speech_config = speechsdk.SpeechConfig(subscription=speech_api_key, region=speech_location)
