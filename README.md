@@ -9,3 +9,4 @@ Setup vscode: https://github.com/microsoft/IoT-For-Beginners/blob/main/1-getting
 
 Phần mình làm không cần counterfit, mình đang làm assignment là build a universal translator: https://github.com/microsoft/IoT-For-Beginners/blob/main/6-consumer/lessons/4-multiple-language-support/assignment.md
 
+Update là phần code tụi e chạy được rồi, bây giờ chỉ cần soạn slide và script để học thuộc.
