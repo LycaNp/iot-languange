@@ -28,9 +28,9 @@ try:
     print("🔌 Connecting to IoT Hub...")
     device_client = IoTHubDeviceClient.create_from_connection_string(connection_string)
     device_client.connect()
-    print("✅ IoT Hub connected.")
+    print("IoT Hub connected.")
 except Exception as e:
-    print(f"⚠️ Failed to connect to IoT Hub: {e}")
+    print(f"Failed to connect to IoT Hub: {e}")
     exit(1)
 
 # === Speech Config ===
@@ -47,9 +47,9 @@ voice_short_name = next((v.short_name for v in voices if v.locale.lower() == fro
 if not voice_short_name:
     # Fallback voice if no exact match found
     voice_short_name = "fr-FR-HenriNeural"
-    print(f"⚠️ No matching voice found for {from_language}. Using fallback voice: {voice_short_name}")
+    print(f"No matching voice found for {from_language}. Using fallback voice: {voice_short_name}")
 else:
-    print(f"🗣 Using voice: {voice_short_name}")
+    print(f"Using voice: {voice_short_name}")
 
 # Final Synthesizer
 synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
@@ -78,13 +78,13 @@ def say(text_to_speak):
     global is_speaking
     with speaking_lock:
         is_speaking = True
-    print(f"{datetime.datetime.now()} 🔊 Speaking: {text_to_speak}")
+    print(f"{datetime.datetime.now()} Speaking: {text_to_speak}")
     try:
         ssml = f"<speak version='1.0' xml:lang='{from_language}'>" \
                f"<voice xml:lang='{from_language}' name='{voice_short_name}'>{text_to_speak}</voice></speak>"
         synthesizer.speak_ssml_async(ssml).get()
     except Exception as e:
-        print(f"⚠️ Speech synthesis error: {e}")
+        print(f"Speech synthesis error: {e}")
     with speaking_lock:
         is_speaking = False
 
@@ -97,11 +97,11 @@ def get_timer_time(text):
     try:
         response = requests.post(get_timer_url, json={'name': text}, timeout=5)
         response.raise_for_status()
-        print(f"{datetime.datetime.now()} ✅ Timer API response: {response.text}")
+        print(f"{datetime.datetime.now()} Timer API response: {response.text}")
         data = response.json()
         return data.get('seconds', 0)
     except Exception as e:
-        print(f"⚠️ Timer parsing error: {e}")
+        print(f"Timer parsing error: {e}")
         return 0
 
 # === Message Handler ===
@@ -116,20 +116,20 @@ def message_handler(message):
                     if not is_speaking:
                         break
                 time.sleep(0.1)
-            print(f"{datetime.datetime.now()} 📩 Message received: {text}")
+            print(f"{datetime.datetime.now()} Message received: {text}")
             say(text)
 
             seconds = get_timer_time(text)
             if seconds > 0:
                 create_timer(seconds)
     except Exception as e:
-        print(f"⚠️ Error in message_handler: {e}")
+        print(f"Error in message_handler: {e}")
 
 device_client.on_message_received = message_handler
 
 # === IoT Hub Method Handler ===
 def handle_method_request(request):
-    print(f"{datetime.datetime.now()} 🔧 Received method request: {request.name}")
+    print(f"{datetime.datetime.now()} Received method request: {request.name}")
     if request.name == 'set-timer':
         try:
             payload = json.loads(request.payload)
@@ -137,18 +137,18 @@ def handle_method_request(request):
             if seconds > 0:
                 create_timer(seconds)
         except Exception as e:
-            print(f"⚠️ Error handling method request payload: {e}")
+            print(f"Error handling method request payload: {e}")
     response = MethodResponse.create_from_method_request(request, 200)
     device_client.send_method_response(response)
 
 device_client.on_method_request_received = handle_method_request
 
-print("🚀 Device B running. Waiting for messages...")
+print("Device B running. Waiting for messages...")
 
 try:
     while True:
         time.sleep(1)
 except KeyboardInterrupt:
-    print("\n🛑 Stopping Device B...")
+    print("\nStopping Device B...")
     device_client.disconnect()
-    print("✅ Exited cleanly.")
+    print("Exited cleanly.")
