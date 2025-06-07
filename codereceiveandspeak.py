@@ -25,7 +25,7 @@ is_speaking = False
 
 # === IoT Hub Connection ===
 try:
-    print("🔌 Connecting to IoT Hub...")
+    print("Connecting to IoT Hub...")
     device_client = IoTHubDeviceClient.create_from_connection_string(connection_string)
     device_client.connect()
     print("IoT Hub connected.")
