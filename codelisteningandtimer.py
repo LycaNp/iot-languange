@@ -138,7 +138,7 @@ def process_text(text):
     with listening_lock:
         if not listening:
             return
-    print(f"🗣 Recognized: {text}")
+    print(f"Recognized: {text}")
     translated = translate_text(text)
     send_to_device(translated, lang=FROM_LANGUAGE)
     say(text)
@@ -170,7 +170,7 @@ device_client.on_method_request_received = handle_method_request
 
 # === Start Listening ===
 recognizer.start_continuous_recognition()
-print("🎤 Listening... Speak a command in English.")
+print("Listening... Speak a command in English.")
 
 # === Main Loop ===
 try:
