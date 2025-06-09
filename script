@@ -76,3 +76,25 @@ Translating a sentence from Language A to B and then back to A often yields diff
 
 +Model Performance Depends on Training Data
 Different neural translation models may generate varying results for the same input, depending on the quality, scope, and bias of their training data.
+
+
+Support multiple languages in application with translations
+
+In the real world, the application should understand as many different languages as possible, from listening for speech, to language understanding, to responding with speech. Translation services can speed up the time to delivery of application.
+This is a smart timer architecture translating Japanese to English, processing in English then translating back to Japanese.
+
+Imagine you are building a smart timer that uses English end-to-end, understanding spoken English and converting that to text, running the language understanding in English, building up responses in English and replying with English speech. If you wanted to add support for Japanese, you could start with translating spoken Japanese to English text, then keep the core of the application the same, then translate the response text to Japanese before speaking the response. This would allow you to quickly add Japanese support, and you can expand to providing full end-to-end Japanese support later.
+
+The downside to relying on machine translation is that different languages and cultures have different ways of saying the same things, so the translation may not match the expression you are expecting.
+
+There are already apps and devices that provide real-time translation of speech and written text, using combinations of speech and translation services. Here is the list of devices that are commercially available:
+Pocketalk Translator
+Langogo Genesis
+Travis Touch Go
+Timekettle WT2 Edge
+(read their information on the slides)
+
+How about translation capabilities built into smart devices?
+Smartphones
+Smart Assistants
+Wearables (watches/earbuds)
